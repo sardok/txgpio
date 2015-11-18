@@ -10,7 +10,7 @@ from twisted.python import log, usage
 from txgpio.sysfs import GPIO
 
 
-class SysfsGPIODevice(Protocol):
+class SysfsGPIOProtocol(Protocol):
     def connectionMade(self):
         log.msg('Connection is made')
 
@@ -24,15 +24,14 @@ class SysfsGPIODevice(Protocol):
 class ISysfsGPIOFactory(Interface):
     def on_receive(self, data):
         """
-        Called when message from device (connected by serial) or test server
-        is ready.
+        Called when data on the gpio pin is changed.
         """
 
 
 class SysfsGPIOFactory(Factory):
     implements(ISysfsGPIOFactory)
 
-    protocol = SysfsGPIODevice
+    protocol = SysfsGPIOProtocol
 
     def on_receive(self, data):
         log.msg('Read value: {}'.format(data))
