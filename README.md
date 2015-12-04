@@ -37,4 +37,4 @@ class SysfsGPIOFactory(Factory):
 reactor.run()
 ```
 
-Examine ```examples/``` directory to see reader & writer applications.
+See ```examples/``` directory for reader & writer applications.
