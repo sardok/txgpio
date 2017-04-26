@@ -115,17 +115,19 @@ class GPIO(abstract.FileDescriptor, object):
             return value
 
     def _export_gpio(self, basedir, num, node_dir):
+        export_cmd = '{}'.format(num)
         if not os.path.exists(node_dir):
             path = os.path.join(basedir, 'export')
             with open(path, 'w') as f:
-                f.write(num)
+                f.write(export_cmd)
             return True
 
     def _unexport_gpio(self, basedir, num):
+        unexport_cmd = '{}'.format(num)
         if self._gpio_node_exported:
             path = os.path.join(basedir, 'unexport')
             with open(path, 'w') as f:
-                f.write(num)
+                f.write(unexport_cmd)
 
     def fileno(self):
         if self.direction == 'in':
